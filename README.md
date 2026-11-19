@@ -28,7 +28,7 @@ This fork tracks [6c65726f79/Transmissionic](https://github.com/6c65726f79/Trans
 
 ## v1.8.1
 
-- **Fixed:** adding a `.torrent` file from the Web UI failed silently when the UI was opened over plain http from a LAN address (e.g. `http://192.168.1.5:9091`). The browser console showed `Unhandled Promise Rejection: Error: no web crypto support`.
+- **Fixed:** adding a `.torrent` file from the Web UI failed silently when the UI was opened over plain http from a LAN address (e.g. `http://10.10.1.X:XXXX`). The browser console showed `Unhandled Promise Rejection: Error: no web crypto support`.
   - Cause: the info hash is computed with `crypto.subtle`, which browsers only expose in secure contexts (https or localhost).
   - Fix: when `crypto.subtle` is unavailable, a built-in pure-JS SHA-1 is used instead. Nothing changes when it is available.
 - **Fixed:** errors while reading a `.torrent` file now show a message instead of failing silently.
