@@ -24,7 +24,14 @@
 
 # Fork changelog
 
-This fork tracks [6c65726f79/Transmissionic](https://github.com/6c65726f79/Transmissionic) and adds bug fixes on top of it.
+This fork tracks [6c65726f79/Transmissionic](https://github.com/6c65726f79/Transmissionic) and adds bug fixes and improvements on top of it.
+
+## v1.9.0
+
+- **Added:** Latin American Spanish (`es-419`), a complete neutral translation of the whole interface.
+- **Added:** Peruvian Spanish (`es-PE`), a regional variant that inherits from `es-419` and only overrides what differs. Dates and numbers use the Peruvian format.
+- **Changed:** browsers set to a Spanish variant without its own translation (e.g. `es`, `es-MX`, `es-AR`, `es-ES`) now use `es-419` instead of Costa Rican Spanish. Chilean (`es-CL`) and Costa Rican (`es-CR`) Spanish are unchanged.
+- **Added:** regional locales can now inherit from a parent locale, so a variant only needs the strings that differ.
 
 ## v1.8.1
 
