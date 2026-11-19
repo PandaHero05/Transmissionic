@@ -11,8 +11,10 @@ const list: Array<string> = [
     "de-at",
     "el",
     "en",
+    "es-419",
     "es-cl",
     "es-cr",
+    "es-pe",
     "fr",
     "fr-ch",
     "hu",
@@ -30,9 +32,25 @@ const list: Array<string> = [
 ];
 
 const aliases: Record<string,any> = {
-    es:'es-cr',
+    es:'es-419',
     zh:'zh-cn',
 };
+
+// Regional variants that only contain overrides on top of a base locale.
+// Keys missing in the variant are taken from its parent (then from English).
+const parents: Record<string,string> = {
+    'es-pe':'es-419',
+};
+
+function deepMerge(base: Record<string,any>, override: Record<string,any>): Record<string,any> {
+    const result: Record<string,any> = {...base};
+    for (const [key, value] of Object.entries(override)) {
+        result[key] = (value && typeof value === 'object' && base[key] && typeof base[key] === 'object')
+            ? deepMerge(base[key], value)
+            : value;
+    }
+    return result;
+}
 
 export const LocaleController = {
     async setLanguage(language: string): Promise<void> {
@@ -48,8 +66,14 @@ export const LocaleController = {
         Locale.setLanguage(code);
     },
     loadLanguages(code: string): Promise<Record<string,any>> {
-        return fetch(`locales/${code}.json`)
-            .then((response) => response.json())
+        const own = fetch(`locales/${code}.json`)
+            .then((response) => response.json());
+        const parent = parents[code];
+        if(!parent) {
+            return own;
+        }
+        return Promise.all([this.loadLanguages(parent), own])
+            .then(([base, data]) => deepMerge(base, data));
     },
     getLanguageCode(language: string, short=false): string {
         const code = language.toLowerCase();

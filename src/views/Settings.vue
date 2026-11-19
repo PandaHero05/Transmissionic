@@ -30,8 +30,10 @@
             <ion-select-option value="de-at">Österreichisches Deutsch</ion-select-option>
             <ion-select-option value="el">ελληνικά</ion-select-option>
             <ion-select-option value="en">English</ion-select-option>
+            <ion-select-option value="es-419">Español latinoamericano</ion-select-option>
             <ion-select-option value="es-CL">Español chileno</ion-select-option>
             <ion-select-option value="es-CR">Español costarricense</ion-select-option>
+            <ion-select-option value="es-PE">Español peruano</ion-select-option>
             <ion-select-option value="fr">Français</ion-select-option>
             <ion-select-option value="fr-ch">Français de Suisse</ion-select-option>
             <ion-select-option value="hu">Magyar</ion-select-option>
