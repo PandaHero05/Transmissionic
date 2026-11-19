@@ -141,7 +141,7 @@ export const FileHandler = {
   },
   async parseBuffer(buffer: ArrayBuffer): Promise<Record<string,any>|void> {
     try {
-      return parseTorrent(buffer);
+      return await parseTorrent(buffer);
     } catch (error: any) {
       Utils.responseToast(error.message);
     }
